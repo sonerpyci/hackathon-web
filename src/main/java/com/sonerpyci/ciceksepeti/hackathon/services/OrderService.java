@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -34,6 +31,50 @@ public class OrderService {
 
         return orders;
     }
+
+    public Order findNearestOrder(String latitude, String longitude) {
+        List<Order> orders = new ArrayList<>();
+        for (Order order : orderRepository.findAll()) {
+            order.setDistance(
+                Math.pow(Double.parseDouble(order.getReceiver().getLatitude().replace(',','.')) - Double.parseDouble(latitude.replace(',','.')), 2)
+                +
+                Math.pow(Double.parseDouble(order.getReceiver().getLongitude().replace(',','.')) - Double.parseDouble(longitude.replace(',','.')), 2)
+            );
+            orders.add(order);
+        }
+
+
+        Collections.sort(orders, new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return Double.compare(o1.getDistance(), o2.getDistance());
+            }
+        });
+
+        return orders.get(0);
+    }
+
+    public List<Order> findNearestOrderList(String latitude, String longitude) {
+        List<Order> orders = new ArrayList<>();
+        for (Order order : orderRepository.findAll()) {
+            order.setDistance(
+                    Math.pow(Double.parseDouble(order.getReceiver().getLatitude().replace(',','.')) - Double.parseDouble(latitude.replace(',','.')), 2)
+                            +
+                            Math.pow(Double.parseDouble(order.getReceiver().getLongitude().replace(',','.')) - Double.parseDouble(longitude.replace(',','.')), 2)
+            );
+            orders.add(order);
+        }
+
+        Collections.sort(orders, new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return Double.compare(o1.getDistance(), o2.getDistance());
+            }
+        });
+
+        return orders;
+    }
+
 
     public void deleteOrder(long id){
         orderRepository.deleteById(id);

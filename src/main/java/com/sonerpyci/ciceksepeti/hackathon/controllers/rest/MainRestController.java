@@ -46,6 +46,16 @@ public class MainRestController {
         return orderService.findAllOrders();
     }
 
+    @PostMapping(value = "/findNearestPoint" )
+    public Order findNearestOrder(@RequestParam String latitude, @RequestParam String longitude, HttpServletRequest req, HttpServletResponse resp){
+        return orderService.findNearestOrder(req.getParameter("latitude"), req.getParameter("longitude"));
+    }
+
+    @PostMapping(value = "/findNearestPointList" )
+    public List<Order> findNearestOrderList(@RequestParam String latitude, @RequestParam String longitude, HttpServletRequest req, HttpServletResponse resp){
+        return orderService.findNearestOrderList(req.getParameter("latitude"), req.getParameter("longitude"));
+    }
+
     @GetMapping(value = "/delete")
     public void deleteOrder(@RequestParam long id){
         orderService.deleteOrder(id);
