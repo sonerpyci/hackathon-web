@@ -23,6 +23,9 @@ public class Order {
     @ManyToOne
     private Receiver receiver;
 
+    @ManyToOne
+    private Status status;
+
     @Column(name="created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date creationTime;
 
@@ -32,6 +35,14 @@ public class Order {
 
     public void setReceiver(Receiver receiver) {
         this.receiver = receiver;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public long getId() {
@@ -46,7 +57,7 @@ public class Order {
         return gift;
     }
 
-    public void setGiftId(Gift gift) {
+    public void setGift(Gift gift) {
         this.gift = gift;
     }
 
