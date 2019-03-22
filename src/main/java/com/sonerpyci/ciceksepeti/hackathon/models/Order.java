@@ -84,6 +84,9 @@ public class Order {
         return dateFormat.format(creationTime);
     }
 
+    public void setCreationTime() {
+        this.creationTime = new Date();
+    }
 
     /*@Transient
     private List pets;
