@@ -60,16 +60,16 @@ public class Order {
         this.creationTime = new Date();
     }
 
-    /*@Transient
-    private List pets;
+    @Transient
+    private double distance;
 
-    public List getPets() {
-        return pets;
+    public double getDistance() {
+        return distance;
     }
 
-    public void setPets(List pets) {
-        this.pets = pets;
-    }*/
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 
 
 }
