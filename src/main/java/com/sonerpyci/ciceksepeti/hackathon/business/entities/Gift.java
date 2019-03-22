@@ -6,4 +6,12 @@ public class Gift {
     private String imageSource;
     private String type;
     private String additionalInfo;
+
+    public Gift(long id, String name, String imageSource, String type, String additionalInfo){
+        this.id = id;
+        this.name = name;
+        this.imageSource = imageSource;
+        this.type = type;
+        this.additionalInfo = additionalInfo;
+    }
 }

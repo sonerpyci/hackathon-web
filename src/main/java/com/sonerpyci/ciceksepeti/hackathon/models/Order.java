@@ -21,8 +21,7 @@ public class Order {
     @ManyToOne
     private Receiver receiver;
 
-    @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date creationTime;
 
     public Receiver getReceiver() {

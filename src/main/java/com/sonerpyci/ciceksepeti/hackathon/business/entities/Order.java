@@ -5,6 +5,12 @@ public class Order {
     private Gift gift;
     private Receiver receiver;
 
+    public Order(long id, Gift gift, Receiver receiver){
+        this.id = id;
+        this.gift = gift;
+        this.receiver = receiver;
+    }
+
     public Receiver getReceiver() {
         return receiver;
     }
