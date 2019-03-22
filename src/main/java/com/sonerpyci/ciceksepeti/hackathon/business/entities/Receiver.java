@@ -2,16 +2,20 @@ package com.sonerpyci.ciceksepeti.hackathon.business.entities;
 
 public class Receiver {
     private long id;
-
     private String name;
-
     private String surname;
-
     private String address;
-
     private String latitude;
-
     private String longitude;
+
+    public Receiver(long id, String name, String surname, String address, String latitude, String longitude) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     public long getId() {
         return id;

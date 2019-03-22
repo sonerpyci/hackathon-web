@@ -44,18 +44,8 @@ public class MainRestController {
 
     @GetMapping(value = "/findAllOrders" )
     public Collection<Order> getAllOrders(){
-        return Business.findAllOrders();
-    }
-
-    @GetMapping(value = "/findNearestPoint")
-    public Order findNearestOrder(){
-        return Business.findNearestOrder();
-    }
-
-    @GetMapping(value = "/findNearestPointList")
-    public Collection<Order> findNearestOrderList() {
-        return Business.findNearestOrderList();
-
+        Business business = new Business();
+        return business.getAllOrders();
     }
 
     @GetMapping(value = "/delete")

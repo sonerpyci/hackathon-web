@@ -1,20 +1,17 @@
 package com.sonerpyci.ciceksepeti.hackathon.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="gift_conditions")
 public class GiftConditions {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    @ManyToOne
     private Gift gift;
-
+    @Column(name = "condition_key")
     private String conditionKey;
-
+    @Column(name = "condition_value")
     private String conditionValue;
 
     public long getId() {
