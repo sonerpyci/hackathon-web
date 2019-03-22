@@ -15,9 +15,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "receiver_id")
-    private long receiverId;
-
     @Column(name = "gift_id")
     private long giftId;
 
@@ -27,11 +24,20 @@ public class Order {
 
     private String latitude;
 
+    @ManyToOne
+    private Receiver receiver;
+
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationTime;
 
+    public Receiver getReceiver() {
+        return receiver;
+    }
 
+    public void setReceiver(Receiver receiver) {
+        this.receiver = receiver;
+    }
 
     public long getId() {
         return id;
@@ -39,14 +45,6 @@ public class Order {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(long receiverId) {
-        this.receiverId = receiverId;
     }
 
     public long getGiftId() {
