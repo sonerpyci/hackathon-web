@@ -5,19 +5,26 @@ import com.sonerpyci.ciceksepeti.hackathon.models.Order;
 import com.sonerpyci.ciceksepeti.hackathon.services.GiftService;
 import com.sonerpyci.ciceksepeti.hackathon.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.bind.annotation.*;
 
+import org.apache.commons.io.IOUtils;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
 
 @RestController
 public class MainRestController {
+    @Autowired
+    ServletContext servletContext;
 
     @Autowired
     private OrderService orderService;
@@ -51,4 +58,9 @@ public class MainRestController {
         orderService.deleteOrder(id);
     }
 
+    @GetMapping(value = "/image/{imageName}")
+    public byte[] getImage(@PathVariable String imageName) throws IOException{
+        InputStream in = this.getClass().getResourceAsStream("/static/images/" + imageName);
+        return IOUtils.toByteArray(in);
+    }
 }
