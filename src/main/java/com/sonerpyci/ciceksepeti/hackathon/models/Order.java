@@ -17,7 +17,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
+    @ManyToOne
     private Gift gift;
 
     @ManyToOne
