@@ -1,7 +1,8 @@
 package com.sonerpyci.ciceksepeti.hackathon.controllers.rest;
 
 import com.google.gson.Gson;
-import com.sonerpyci.ciceksepeti.hackathon.models.Order;
+import com.sonerpyci.ciceksepeti.hackathon.business.Business;
+import com.sonerpyci.ciceksepeti.hackathon.business.entities.Order;
 import com.sonerpyci.ciceksepeti.hackathon.services.GiftService;
 import com.sonerpyci.ciceksepeti.hackathon.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,18 @@ public class MainRestController {
 
     @GetMapping(value = "/findAllOrders" )
     public Collection<Order> getAllOrders(){
-        return orderService.findAllOrders();
+        return Business.findAllOrders();
+    }
+
+    @GetMapping(value = "/findNearestPoint")
+    public Order findNearestOrder(){
+        return Business.findNearestOrder();
+    }
+
+    @GetMapping(value = "/findNearestPointList")
+    public Collection<Order> findNearestOrderList() {
+        return Business.findNearestOrderList();
+
     }
 
     @GetMapping(value = "/delete")
