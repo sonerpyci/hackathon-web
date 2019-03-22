@@ -11,7 +11,7 @@ public class GiftConditions {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private long giftId;
+    private Gift gift;
 
     private String conditionKey;
 
@@ -25,12 +25,12 @@ public class GiftConditions {
         this.id = id;
     }
 
-    public long getGiftId() {
-        return giftId;
+    public Gift getGift() {
+        return gift;
     }
 
-    public void setGiftId(long giftId) {
-        this.giftId = giftId;
+    public void setGift(Gift gift) {
+        this.gift = gift;
     }
 
     public String getConditionKey() {
