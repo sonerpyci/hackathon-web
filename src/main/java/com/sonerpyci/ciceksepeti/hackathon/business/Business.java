@@ -7,6 +7,9 @@ import com.sonerpyci.ciceksepeti.hackathon.services.GiftService;
 import com.sonerpyci.ciceksepeti.hackathon.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sonerpyci.ciceksepeti.hackathon.business.entities.Order;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +33,14 @@ public class Business {
         }).collect(Collectors.toList());
 
         return orders;
+    }
+
+    public static Order findNearestOrder(){
+        return new Order();
+    }
+
+    public static List<Order> findNearestOrderList(){
+        return Collections.emptyList();
     }
 
 }

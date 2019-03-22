@@ -1,6 +1,8 @@
 package com.sonerpyci.ciceksepeti.hackathon.models;
 
 
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -54,7 +56,7 @@ public class Order {
         return dateFormat.format(creationTime);
     }
 
-    public void setCreationTime() {
+    public void setCreationTime(Date newDate) {
         this.creationTime = new Date();
     }
 
