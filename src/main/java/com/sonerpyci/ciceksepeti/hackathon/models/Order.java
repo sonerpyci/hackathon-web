@@ -18,12 +18,6 @@ public class Order {
     @Column(name = "gift_id")
     private long giftId;
 
-    private String address;
-
-    private String longitute;
-
-    private String latitude;
-
     @ManyToOne
     private Receiver receiver;
 
@@ -55,29 +49,6 @@ public class Order {
         this.giftId = giftId;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getLongitute() {
-        return longitute;
-    }
-
-    public void setLongitute(String longitute) {
-        this.longitute = longitute;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
 
     public String getCreationTime() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
