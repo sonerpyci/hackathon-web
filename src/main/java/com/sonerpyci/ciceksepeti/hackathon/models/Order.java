@@ -15,8 +15,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "gift_id")
-    private long giftId;
+    @OneToOne
+    private Gift gift;
 
     @ManyToOne
     private Receiver receiver;
@@ -41,12 +41,12 @@ public class Order {
         this.id = id;
     }
 
-    public long getGiftId() {
-        return giftId;
+    public Gift getGift() {
+        return gift;
     }
 
-    public void setGiftId(long giftId) {
-        this.giftId = giftId;
+    public void setGiftId(Gift gift) {
+        this.gift = gift;
     }
 
 
