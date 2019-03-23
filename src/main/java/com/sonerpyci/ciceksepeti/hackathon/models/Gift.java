@@ -3,6 +3,9 @@ package com.sonerpyci.ciceksepeti.hackathon.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity(name="gift")
 public class Gift {
@@ -23,8 +26,19 @@ public class Gift {
     @Column(name = "additional_info")
     private String additionalInfo;
 
-    @OneToMany
-    private List<GiftConditions> giftConditions;
+    /*@OneToMany(mappedBy = "gift", cascade = CascadeType.ALL)
+    private Set<GiftConditions> giftConditionsSet;
+
+    public List<Set<GiftConditions>> getGiftConditionsSet() {
+        return Stream.of(giftConditionsSet).collect(Collectors.toList());
+    }
+
+    public Gift(GiftConditions... giftConditions) {
+        this.giftConditionsSet = Stream.of(giftConditions).collect(Collectors.toSet());
+        this.giftConditionsSet.forEach(x -> x.setGift(this));
+    }*/
+
+
 
     public long getId() {
         return id;
@@ -66,11 +80,5 @@ public class Gift {
         this.additionalInfo = additionalInfo;
     }
 
-    public List<GiftConditions> getGiftConditions() {
-        return giftConditions;
-    }
 
-    public void setGiftConditions(List<GiftConditions> giftConditions){
-        this.giftConditions = giftConditions;
-    }
 }

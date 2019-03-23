@@ -1,6 +1,8 @@
 package com.sonerpyci.ciceksepeti.hackathon.controllers.rest;
 
 import com.google.gson.Gson;
+import com.sonerpyci.ciceksepeti.hackathon.models.Gift;
+import com.sonerpyci.ciceksepeti.hackathon.models.GiftConditions;
 import com.sonerpyci.ciceksepeti.hackathon.models.Order;
 import com.sonerpyci.ciceksepeti.hackathon.services.GiftService;
 import com.sonerpyci.ciceksepeti.hackathon.services.OrderService;
@@ -63,10 +65,10 @@ public class MainRestController {
         return orderService.findNearestOrderList(req.getParameter("latitude"), req.getParameter("longitude"));
     }
 
-    @PostMapping(value = "/findOrderByQr" )
-    public Order findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
-        return orderService.findOrderByQr(Long.valueOf(req.getParameter("id")));
-    }
+   /* @PostMapping(value = "/findOrderByQr" )
+    public List<GiftConditions> findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
+        return orderService.getGiftConditonsByQr(Long.valueOf(req.getParameter("id")));
+    }*/
 
 
 

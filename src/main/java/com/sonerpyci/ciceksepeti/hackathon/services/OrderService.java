@@ -81,7 +81,7 @@ public class OrderService {
         return orders;
     }
 
-    public List<GiftConditions> getGiftConditonsByQr(Long id){
+    /*public List<GiftConditions> getGiftConditonsByQr(Long id){
         Optional<Order> optionalOrder = orderRepository.findById(id);
         Order order = optionalOrder.orElse(null);
         GiftConditions conditions;
@@ -98,7 +98,7 @@ public class OrderService {
         }
 
         return null;
-    }
+    }*/
 
 
     public void deleteOrder(long id){
