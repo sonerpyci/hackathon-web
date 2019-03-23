@@ -1,6 +1,9 @@
 package com.sonerpyci.ciceksepeti.hackathon.controllers.rest;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sonerpyci.ciceksepeti.hackathon.models.Gift;
 import com.sonerpyci.ciceksepeti.hackathon.models.GiftConditions;
 import com.sonerpyci.ciceksepeti.hackathon.models.Order;
@@ -15,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.SchemaOutputResolver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -58,16 +62,24 @@ public class MainRestController {
     }
 
     @PostMapping(value = "/findNearestPoint" )
-    public Order findNearestOrder(@RequestParam String latitude, @RequestParam String longitude, HttpServletRequest req, HttpServletResponse resp){
-        return orderService.findNearestOrder(req.getParameter("latitude"), req.getParameter("longitude"));
+    public Order findNearestOrder(@RequestParam String data, HttpServletRequest req, HttpServletResponse resp){
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(data);
+        JsonObject jsonObject = jsonTree.getAsJsonObject();
+        Order order = orderService.findNearestOrder(jsonObject.get("latitude").getAsString(), jsonObject.get("longitude").getAsString());
+
+        System.out.println(order.getDistance());
+
+        return order;
     }
 
     @PostMapping(value = "/findNearestPointList" )
     public List<Order> findNearestOrderList(@RequestParam String latitude, @RequestParam String longitude, HttpServletRequest req, HttpServletResponse resp){
-        return orderService.findNearestOrderList(req.getParameter("latitude"), req.getParameter("longitude"));
+        List<Order> orderList = orderService.findNearestOrderList(req.getParameter("latitude"), req.getParameter("longitude"));
+        return orderList;
     }
 
-    @PostMapping(value = "/findOrderByQr" )
+    @PostMapping(value = "/findOrderBy" )
     public Set<GiftConditions> findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
         return orderService.getGiftConditonsByQr(Long.valueOf(req.getParameter("id")));
     }
