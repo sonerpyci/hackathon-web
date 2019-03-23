@@ -1,6 +1,8 @@
 package com.sonerpyci.ciceksepeti.hackathon.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -26,17 +28,18 @@ public class Gift {
     @Column(name = "additional_info")
     private String additionalInfo;
 
-    /*@OneToMany(mappedBy = "gift", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "gift", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<GiftConditions> giftConditionsSet;
 
-    public List<Set<GiftConditions>> getGiftConditionsSet() {
-        return Stream.of(giftConditionsSet).collect(Collectors.toList());
+    public Set<GiftConditions> getGiftConditionsSet() {
+        return giftConditionsSet;
     }
 
-    public Gift(GiftConditions... giftConditions) {
+    public void setGiftConditionsSet(GiftConditions... giftConditions) {
         this.giftConditionsSet = Stream.of(giftConditions).collect(Collectors.toSet());
         this.giftConditionsSet.forEach(x -> x.setGift(this));
-    }*/
+    }
 
 
 

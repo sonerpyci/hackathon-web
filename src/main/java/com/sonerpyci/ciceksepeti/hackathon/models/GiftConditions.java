@@ -1,5 +1,7 @@
 package com.sonerpyci.ciceksepeti.hackathon.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity(name="gift_conditions")
@@ -8,6 +10,7 @@ public class GiftConditions {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
+    @JsonBackReference
     private Gift gift;
     @Column(name = "condition_key")
     private String conditionKey;

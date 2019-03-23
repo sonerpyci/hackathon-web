@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -66,10 +67,10 @@ public class MainRestController {
         return orderService.findNearestOrderList(req.getParameter("latitude"), req.getParameter("longitude"));
     }
 
-   /* @PostMapping(value = "/findOrderByQr" )
-    public List<GiftConditions> findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
+    @PostMapping(value = "/findOrderByQr" )
+    public Set<GiftConditions> findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
         return orderService.getGiftConditonsByQr(Long.valueOf(req.getParameter("id")));
-    }*/
+    }
 
 
 

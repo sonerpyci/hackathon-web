@@ -81,14 +81,14 @@ public class OrderService {
         return orders;
     }
 
-    /*public List<GiftConditions> getGiftConditonsByQr(Long id){
+    public Set<GiftConditions> getGiftConditonsByQr(Long id){
         Optional<Order> optionalOrder = orderRepository.findById(id);
         Order order = optionalOrder.orElse(null);
         GiftConditions conditions;
 
         if (order != null) {
             if(order.getStatus().getStatusDescription().equalsIgnoreCase("delivered")){
-                return order.getGift().getGiftConditions();
+                return order.getGift().getGiftConditionsSet();
             }
             else{
                 Status status = statusService.getStatusByDescription("Delivered");
@@ -98,7 +98,7 @@ public class OrderService {
         }
 
         return null;
-    }*/
+    }
 
 
     public void deleteOrder(long id){
