@@ -94,6 +94,17 @@ public class MainRestController {
         return orderList;
     }
 
+
+    @PostMapping(value = "/findOrderById" )
+    public Order findOrderById(@RequestParam String data, HttpServletRequest req, HttpServletResponse resp){
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(data);
+        JsonObject jsonObject = jsonTree.getAsJsonObject();
+        Order order = orderService.findOrderById(Long.valueOf(jsonObject.get("id").getAsString()));
+        return order;
+    }
+
+
     @PostMapping(value = "/findOrderByQr" )
     public Set<GiftConditions> findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
         return orderService.getGiftConditonsByQr(Long.valueOf(req.getParameter("id")));
