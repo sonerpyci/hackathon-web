@@ -93,6 +93,7 @@ public class OrderService {
             else{
                 Status status = statusService.getStatusByDescription("Delivered");
                 order.setStatus(status);
+                order.getShop().setCurrentOrderCount(order.getShop().getCurrentOrderCount() + 1);
                 orderRepository.save(order);
             }
         }
