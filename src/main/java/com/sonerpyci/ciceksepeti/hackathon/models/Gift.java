@@ -22,8 +22,8 @@ public class Gift {
     @Column(name = "image_source")
     private String imageSource;
 
-    @Column(name = "type")
-    private String type;
+    @ManyToOne
+    private GiftType giftType;
 
     @Column(name = "additional_info")
     private String additionalInfo;
@@ -67,12 +67,12 @@ public class Gift {
         this.imageSource = imageSource;
     }
 
-    public String getType() {
-        return type;
+    public GiftType getGiftType() {
+        return giftType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setGiftType(GiftType giftType) {
+        this.giftType = giftType;
     }
 
     public String getAdditionalInfo() {

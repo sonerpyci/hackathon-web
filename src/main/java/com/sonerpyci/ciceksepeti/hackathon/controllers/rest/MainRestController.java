@@ -4,13 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.sonerpyci.ciceksepeti.hackathon.models.Gift;
 import com.sonerpyci.ciceksepeti.hackathon.models.GiftConditions;
 import com.sonerpyci.ciceksepeti.hackathon.models.Order;
+import com.sonerpyci.ciceksepeti.hackathon.models.Shop;
 import com.sonerpyci.ciceksepeti.hackathon.services.GiftService;
 import com.sonerpyci.ciceksepeti.hackathon.services.OrderService;
+import com.sonerpyci.ciceksepeti.hackathon.services.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 
 import org.apache.commons.io.IOUtils;
@@ -18,9 +18,6 @@ import org.apache.commons.io.IOUtils;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.SchemaOutputResolver;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -37,6 +34,8 @@ public class MainRestController {
     private OrderService orderService;
     @Autowired
     private GiftService giftService;
+    @Autowired
+    private ShopService shopService;
 
 
     @PostMapping(value = "/searchOrder")
@@ -73,15 +72,46 @@ public class MainRestController {
         return order;
     }
 
+    @PostMapping(value = "/findNearestShop" )
+    public Shop findNearestShop(@RequestParam String data, HttpServletRequest req, HttpServletResponse resp){
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(data);
+        JsonObject jsonObject = jsonTree.getAsJsonObject();
+        Shop shop = shopService.findNearestShop(jsonObject.get("latitude").getAsString(), jsonObject.get("longitude").getAsString());
+
+        System.out.println(shop.getDistance());
+
+        return shop;
+    }
+
+
     @PostMapping(value = "/findNearestPointList" )
-    public List<Order> findNearestOrderList(@RequestParam String latitude, @RequestParam String longitude, HttpServletRequest req, HttpServletResponse resp){
-        List<Order> orderList = orderService.findNearestOrderList(req.getParameter("latitude"), req.getParameter("longitude"));
+    public List<Order> findNearestOrderList(@RequestParam String data, HttpServletRequest req, HttpServletResponse resp){
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(data);
+        JsonObject jsonObject = jsonTree.getAsJsonObject();
+        List<Order> orderList = orderService.findNearestOrderList(jsonObject.get("latitude").getAsString(), jsonObject.get("longitude").getAsString());
         return orderList;
     }
 
     @PostMapping(value = "/getGiftConditions" )
-    public Set<GiftConditions> findOrderByQr(@RequestParam String id, HttpServletRequest req, HttpServletResponse resp){
+    public Set<GiftConditions> findOrderByQr(@RequestParam String id, HttpServletRequest req, HttpServletResponse resp) {
         return orderService.getGiftConditonsByQr(Long.valueOf(id));
+    }
+
+    @PostMapping(value = "/findOrderById" )
+    public Order findOrderById(@RequestParam String data, HttpServletRequest req, HttpServletResponse resp){
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(data);
+        JsonObject jsonObject = jsonTree.getAsJsonObject();
+        Order order = orderService.findOrderById(Long.valueOf(jsonObject.get("id").getAsString()));
+        return order;
+    }
+
+
+    @PostMapping(value = "/findOrderByQr" )
+    public Set<GiftConditions> findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
+        return orderService.getGiftConditonsByQr(Long.valueOf(req.getParameter("id")));
     }
 
 

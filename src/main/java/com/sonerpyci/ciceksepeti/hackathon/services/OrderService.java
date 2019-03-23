@@ -66,7 +66,7 @@ public class OrderService {
             order.setDistance(
                     Math.pow(Double.parseDouble(order.getReceiver().getLatitude().replace(',','.')) - Double.parseDouble(latitude.replace(',','.')), 2)
                             +
-                            Math.pow(Double.parseDouble(order.getReceiver().getLongitude().replace(',','.')) - Double.parseDouble(longitude.replace(',','.')), 2)
+                    Math.pow(Double.parseDouble(order.getReceiver().getLongitude().replace(',','.')) - Double.parseDouble(longitude.replace(',','.')), 2)
             );
             orders.add(order);
         }
@@ -93,6 +93,7 @@ public class OrderService {
             else{
                 Status status = statusService.getStatusByDescription("Delivered");
                 order.setStatus(status);
+                order.getShop().setCurrentOrderCount(order.getShop().getCurrentOrderCount() + 1);
                 orderRepository.save(order);
             }
         }

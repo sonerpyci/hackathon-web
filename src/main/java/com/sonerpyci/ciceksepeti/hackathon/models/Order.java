@@ -24,6 +24,9 @@ public class Order {
     private Receiver receiver;
 
     @ManyToOne
+    private Shop shop;
+
+    @ManyToOne
     private Status status;
 
     @Column(name="created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -35,6 +38,14 @@ public class Order {
 
     public void setReceiver(Receiver receiver) {
         this.receiver = receiver;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     public Status getStatus() {
