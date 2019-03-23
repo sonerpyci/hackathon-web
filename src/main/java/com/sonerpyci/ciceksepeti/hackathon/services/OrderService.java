@@ -3,7 +3,9 @@ package com.sonerpyci.ciceksepeti.hackathon.services;
 
 import com.sonerpyci.ciceksepeti.hackathon.dao.OrderRepository;
 import com.sonerpyci.ciceksepeti.hackathon.dao.GiftRepository;
+import com.sonerpyci.ciceksepeti.hackathon.dao.StatusRepository;
 import com.sonerpyci.ciceksepeti.hackathon.models.Order;
+import com.sonerpyci.ciceksepeti.hackathon.models.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class OrderService {
 
     @Autowired
     private GiftRepository giftRepository;
+
+    @Autowired
+    private StatusService statusService;
 
     @Autowired
     private EntityManager entityManager;
@@ -73,6 +78,19 @@ public class OrderService {
         });
 
         return orders;
+    }
+
+
+    public Order findOrderByQr(Long id){
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        Order order = optionalOrder.orElse(null);
+        if (order != null) {
+            Status status = statusService.getStatusByDescription("Delivered");
+            order.setStatus(status);
+            orderRepository.save(order);
+        }
+
+        return optionalOrder.orElse(null);
     }
 
 

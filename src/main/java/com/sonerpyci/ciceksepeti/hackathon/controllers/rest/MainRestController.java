@@ -63,6 +63,17 @@ public class MainRestController {
         return orderService.findNearestOrderList(req.getParameter("latitude"), req.getParameter("longitude"));
     }
 
+    @PostMapping(value = "/findOrderByQr" )
+    public Order findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
+        return orderService.findOrderByQr(Long.valueOf(req.getParameter("id")));
+    }
+
+
+
+
+
+
+
     @GetMapping(value = "/delete")
     public void deleteOrder(@RequestParam long id){
         orderService.deleteOrder(id);
