@@ -2,6 +2,7 @@ package com.sonerpyci.ciceksepeti.hackathon.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name="gift")
 public class Gift {
@@ -21,6 +22,9 @@ public class Gift {
 
     @Column(name = "additional_info")
     private String additionalInfo;
+
+    @OneToMany
+    private List<GiftConditions> giftConditions;
 
     public long getId() {
         return id;
@@ -60,5 +64,13 @@ public class Gift {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    public List<GiftConditions> getGiftConditions() {
+        return giftConditions;
+    }
+
+    public void setGiftConditions(List<GiftConditions> giftConditions){
+        this.giftConditions = giftConditions;
     }
 }

@@ -4,6 +4,7 @@ package com.sonerpyci.ciceksepeti.hackathon.services;
 import com.sonerpyci.ciceksepeti.hackathon.dao.OrderRepository;
 import com.sonerpyci.ciceksepeti.hackathon.dao.GiftRepository;
 import com.sonerpyci.ciceksepeti.hackathon.dao.StatusRepository;
+import com.sonerpyci.ciceksepeti.hackathon.models.GiftConditions;
 import com.sonerpyci.ciceksepeti.hackathon.models.Order;
 import com.sonerpyci.ciceksepeti.hackathon.models.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,17 +81,23 @@ public class OrderService {
         return orders;
     }
 
-
-    public Order findOrderByQr(Long id){
+    public List<GiftConditions> getGiftConditonsByQr(Long id){
         Optional<Order> optionalOrder = orderRepository.findById(id);
         Order order = optionalOrder.orElse(null);
+        GiftConditions conditions;
+
         if (order != null) {
-            Status status = statusService.getStatusByDescription("Delivered");
-            order.setStatus(status);
-            orderRepository.save(order);
+            if(order.getStatus().getStatusDescription().equalsIgnoreCase("delivered")){
+                return order.getGift().getGiftConditions();
+            }
+            else{
+                Status status = statusService.getStatusByDescription("Delivered");
+                order.setStatus(status);
+                orderRepository.save(order);
+            }
         }
 
-        return optionalOrder.orElse(null);
+        return null;
     }
 
 
