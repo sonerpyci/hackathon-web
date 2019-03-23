@@ -2,7 +2,7 @@
 target/
 HELP.md
 cicek-sepeti-hackathon.iml
-
+.mvn/wrapper/maven-wrapper.jar
 # Compiled class file
 *.class
 
@@ -16,7 +16,6 @@ cicek-sepeti-hackathon.iml
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
