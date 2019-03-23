@@ -79,9 +79,9 @@ public class MainRestController {
         return orderList;
     }
 
-    @PostMapping(value = "/findOrderByQr" )
-    public Set<GiftConditions> findOrderByQr(@RequestParam long id, HttpServletRequest req, HttpServletResponse resp){
-        return orderService.getGiftConditonsByQr(Long.valueOf(req.getParameter("id")));
+    @PostMapping(value = "/getGiftConditions" )
+    public Set<GiftConditions> findOrderByQr(@RequestParam String id, HttpServletRequest req, HttpServletResponse resp){
+        return orderService.getGiftConditonsByQr(Long.valueOf(id));
     }
 
 
